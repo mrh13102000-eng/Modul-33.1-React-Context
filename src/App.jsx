@@ -1,22 +1,20 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Utama from './pages/Utama';
-import ListUser from './pages/ListUser';
-import DetailUser from './pages/DetailUser';
-import PostUser from './pages/PostUser';
-import EditPost from './pages/EditPost';
-import CommentUser from './pages/CommentUser';
+import { TodoProvider } from './context/TodoContext';
+import { VoteProvider } from './context/VoteContext';
+import Home from './pages/Home';
+import Detail from './pages/Detail';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Utama />} />
-        <Route path="/users" element={<ListUser />} />
-        <Route path="/users/:user_id" element={<DetailUser />} />
-        <Route path="/users/:user_id/posts" element={<PostUser />} />
-        <Route path="/users/:user_id/posts/:post_id/edit" element={<EditPost />} />
-        <Route path="/users/:user_id/comments" element={<CommentUser />} />
-      </Routes>
+      <TodoProvider>
+        <VoteProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/detail" element={<Detail />} />
+          </Routes>
+        </VoteProvider>
+      </TodoProvider>
     </BrowserRouter>
   );
 }
